@@ -1,0 +1,42 @@
+name: Check Lint, Formatting, and imports
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.draft == false
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Set up Make
+        run: sudo apt-get install -y make
+
+      - name: Run Format
+        run: make format
+
+      - name: Run ruff (lint)
+        run: make ruff
+
+      - name: Run typecheck
+        run: make mypy
+
+      - name: Run pytest
+        run: make pytest
+
+      - name: Run coverage
+        run: make coverage

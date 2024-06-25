@@ -12,6 +12,8 @@ For reference: https://miro.medium.com/v2/resize:fit:1400/1*5ZLci3SuR0zM_QlZOADv
 just learn poetry you're doing yourself a disservice by continuing to stick with pip
 
 ## TODO
+- add github actions for ci
+- fix mypy
 - Fix csv+xlsx import
 - fix hard coded paths
 - add option to select text file or multiple files
