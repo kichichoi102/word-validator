@@ -29,9 +29,15 @@ test:
 	make pytest
 	make coverage
 
+requirements:
+	poetry export -f requirements.txt --output requirements.txt --without-hashes
+
 ci-check:
 	make format
 	make ruff
 	make mypy
 	make pytest
 	make coverage
+
+cd:
+	make requirements
