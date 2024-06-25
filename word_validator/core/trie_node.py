@@ -1,5 +1,5 @@
-"""This module contains the TrieNode class, which is used to build a trie data structure to represent the
-dictionary of valid (scrabble) words."""
+"""This module contains the TrieNode class, which is used to build a trie data structure
+to represent the dictionary of valid (scrabble) words."""
 
 __all__ = ["TrieNode"]
 
