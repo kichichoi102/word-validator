@@ -29,12 +29,6 @@ test:
 	make pytest
 	make coverage
 
-type-check:
-	make mypy
-
-lint:
-	make ruff
-
 ci-check:
 	make format
 	make ruff

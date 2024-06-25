@@ -10,10 +10,10 @@ from word_validator.core.word_parser import WordParser
 
 
 class Trie:
-    def __init__(self):
+    def __init__(self) -> None:
         self.root: TrieNode = TrieNode()
 
-    def insert(self, word: str) -> str:
+    def insert(self, word: str) -> None:
         node = self.root
         for char in word:
             char = char.lower()
@@ -32,7 +32,7 @@ class Trie:
 
     @staticmethod
     @lru_cache(maxsize=1)
-    def initialize_trie(file_path: str = "word_validator/data/words.txt"):
+    def initialize_trie(file_path: str = "word_validator/data/words.txt") -> "Trie":
         word_parser = WordParser(file_path)
         word_parser.parse_words()
         trie = Trie()

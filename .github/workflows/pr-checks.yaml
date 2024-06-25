@@ -1,0 +1,41 @@
+name: CI Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request.base.ref == 'main'
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.12'
+
+      - name: Install Poetry and Dependencies
+        run: |
+          curl -sSL https://install.python-poetry.org | python3 -
+          echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+          poetry config virtualenvs.create true
+          poetry config virtualenvs.in-project true
+
+          poetry install --no-interaction --no-ansi
+
+      - name: Set up Make
+        run: sudo apt-get install -y make
+
+      - name: Run Format
+        run: make format
+
+      - name: Run ruff (lint)
+        run: make ruff
+
+      - name: Run typecheck
+        run: make mypy
