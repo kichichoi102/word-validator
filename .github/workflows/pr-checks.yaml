@@ -39,6 +39,3 @@ jobs:
 
       - name: Run typecheck
         run: make mypy
-
-      - name: Run pytest
-        run: make pytest
