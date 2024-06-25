@@ -38,7 +38,7 @@ jobs:
         run: make ruff
 
       - name: Run typecheck
-        run: make mypy-add-missing-imports && make mypy
+        run: make mypy
 
       - name: Run pytest
         run: make pytest

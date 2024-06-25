@@ -8,6 +8,6 @@ from typing import DefaultDict
 
 
 class TrieNode:
-    def __init__(self):
+    def __init__(self) -> None:
         self.children: DefaultDict[str, TrieNode] = defaultdict(TrieNode)
         self.is_end_of_word: bool = False
