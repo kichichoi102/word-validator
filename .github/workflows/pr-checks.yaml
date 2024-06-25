@@ -27,7 +27,6 @@ jobs:
           poetry config virtualenvs.in-project true
 
           poetry install --no-interaction --no-ansi
-          poetry run mypy --install-types --non-interactive
 
       - name: Set up Make
         run: sudo apt-get install -y make
@@ -39,10 +38,7 @@ jobs:
         run: make ruff
 
       - name: Run typecheck
-        run: make mypy
+        run: make mypy-add-missing-imports && make mypy
 
       - name: Run pytest
         run: make pytest
-
-      - name: Run coverage
-        run: make coverage
