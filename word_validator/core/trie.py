@@ -32,7 +32,7 @@ class Trie:
 
     @staticmethod
     @lru_cache(maxsize=1)
-    def initialize_trie(file_path: str = "word_validator/data/words.txt") -> "Trie":
+    def initialize_trie(file_path: str = "word_validator/data/storage/words.txt") -> "Trie":
         word_parser = WordParser(file_path)
         word_parser.parse_words()
         trie = Trie()

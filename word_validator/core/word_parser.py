@@ -2,9 +2,8 @@ import csv
 
 import openpyxl
 
-
 class WordParser:
-    def __init__(self, file_path: str = "word_validator/data/words.txt") -> None:
+    def __init__(self, file_path: str) -> None:
         file_type = self._validate_file_type(file_path)
 
         self.file_path = file_path
@@ -12,22 +11,25 @@ class WordParser:
         self.words: list[str] = []
 
     def parse_words(self) -> None:
-        match self.file_type:
-            case "txt":
-                with open(self.file_path, "r") as file:
-                    self.words = [line.strip() for line in file.readlines()]
-            case "csv":
-                with open(self.file_path, newline="") as csvfile:
-                    self.words = [row[0] for row in csv.reader(csvfile, delimiter=",")]
-            case "xlsx" | "xls":
-                wb = openpyxl.load_workbook(self.file_path)
-                sheet = wb.active
-                if sheet is not None:
-                    self.words = [
-                        str(row[0]) for row in sheet.iter_rows(values_only=True)
-                    ]
-                else:
-                    raise ValueError("Sheet not found in the workbook.")
+        try:
+            match self.file_type:
+                case "txt":
+                    with open(self.file_path, "r") as file:
+                        self.words = [line.strip() for line in file.readlines()]
+                case "csv":
+                    with open(self.file_path, newline="") as csvfile:
+                        self.words = [row[0] for row in csv.reader(csvfile, delimiter=",")]
+                case "xlsx" | "xls":
+                    wb = openpyxl.load_workbook(self.file_path)
+                    sheet = wb.active
+                    if sheet is not None:
+                        self.words = [
+                            str(row[0]) for row in sheet.iter_rows(values_only=True)
+                        ]
+                    else:
+                        raise ValueError("Sheet not found in the workbook.")
+        except (FileNotFoundError):
+            raise ValueError("File not found")
 
     def _validate_file_type(self, file_path: str) -> str:
         try:
