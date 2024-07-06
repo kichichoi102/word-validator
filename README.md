@@ -12,15 +12,12 @@ For reference: https://miro.medium.com/v2/resize:fit:1400/1*5ZLci3SuR0zM_QlZOADv
 just learn poetry you're doing yourself a disservice by continuing to stick with pip
 
 ## TODO
-- add github actions for ci
-- fix mypy
-- Fix csv+xlsx import
-- fix hard coded paths
+- Add base error handlers to raise appropriate http codes.
+- fix hard coded paths (maybe add another endpoint to select file and upload file)
 - add option to select text file or multiple files
 - db might be overkill, but think of a way to efficiently store trie data
 - Add tests + coverage
 - add route to do multiple words (convenience not efficiency) 
-- host (probs on vercel)
 - Dockerize
 
 ## Sources:
