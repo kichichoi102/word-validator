@@ -12,7 +12,6 @@ For reference: https://miro.medium.com/v2/resize:fit:1400/1*5ZLci3SuR0zM_QlZOADv
 just learn poetry you're doing yourself a disservice by continuing to stick with pip
 
 ## TODO
-- Add base error handlers to raise appropriate http codes.
 - fix hard coded paths (maybe add another endpoint to select file and upload file)
 - add option to select text file or multiple files
 - db might be overkill, but think of a way to efficiently store trie data
