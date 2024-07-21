@@ -2,15 +2,15 @@ import csv
 
 import openpyxl
 
-from word_validator.api.exceptions import BadRequest, FileNotFound, FileTypeNotSupported
+from word_validator.api.exceptions import BadRequest, FileNotFound
+
+from .file_helpers import validate_file_extension
 
 
 class WordParser:
     def __init__(self, file_path: str) -> None:
-        file_type = self._validate_file_type(file_path)
-
         self.file_path = file_path
-        self.file_type = file_type
+        self.file_type = validate_file_extension(file_path)
         self.words: list[str] = []
 
     def parse_words(self) -> None:
@@ -34,12 +34,4 @@ class WordParser:
                     else:
                         raise BadRequest("Sheet not found in the workbook.")
         except FileNotFoundError:
-            raise FileNotFound("File not found")
-
-    def _validate_file_type(self, file_path: str) -> str:
-        file_type = file_path.split(".")[-1]
-        match file_type:
-            case "txt" | "csv" | "xlsx" | "xls":
-                return file_type
-            case _:
-                raise FileTypeNotSupported(f"file_type '{file_type}' is not supported")
+            raise FileNotFound(f"File with path: {self.file_path} was not found.")
