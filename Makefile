@@ -6,6 +6,7 @@ all:
 	make mypy
 	make pytest
 	make coverage
+	make requirements
 
 format:
 	poetry run ruff check word_validator --fix-only
