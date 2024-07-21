@@ -33,6 +33,7 @@ async def root() -> RedirectResponse:
 
 if __name__ == "__main__":
     import uvicorn
-
+    app.state.config = Config()
+    app.state.trie = initialize_trie(app.state.config.dictionary_file_path)
     config = app.state.config
     uvicorn.run(app, host=config.host, port=config.port)
