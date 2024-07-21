@@ -8,6 +8,8 @@ from word_validator.api import search_router, setup_error_handlers
 from word_validator.config import Config
 from word_validator.dependencies import initialize_trie
 
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
