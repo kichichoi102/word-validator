@@ -3,10 +3,8 @@ to represent the dictionary of valid (scrabble) words."""
 
 __all__ = ["Trie"]
 
-from functools import lru_cache
-
-from word_validator.core.trie_node import TrieNode
-from word_validator.core.word_parser import WordParser
+from .trie_node import TrieNode
+from .word_parser import WordParser
 
 
 class Trie:
@@ -31,13 +29,21 @@ class Trie:
         return node.is_end_of_word
 
     @staticmethod
-    @lru_cache(maxsize=1)
-    def initialize_trie(
-        file_path: str = "word_validator/data/storage/words.txt",
-    ) -> "Trie":
+    def initialize_trie(file_path: str) -> "Trie":
+        Trie._try_open_file(file_path)
         word_parser = WordParser(file_path)
         word_parser.parse_words()
         trie = Trie()
         for word in word_parser.words:
             trie.insert(word)
         return trie
+
+    @staticmethod
+    def _try_open_file(file_path: str) -> None:
+        try:
+            with open(file_path, "r") as file:
+                file.readline()
+        except FileNotFoundError:
+            raise FileNotFoundError(f"File not found: {file_path}")
+        except Exception as e:
+            raise Exception(f"Error opening file: {e}")

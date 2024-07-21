@@ -30,6 +30,10 @@ include_trailing_comma = true
 force_grid_wrap = 0
 line_length = 88
 
+[tool.ruff]
+line-length = 88
+ignore = ["E501"] # ignore line length, known issue with ruff
+
 [tool.mypy]
 disallow_untyped_defs = true
 no_implicit_optional = true
