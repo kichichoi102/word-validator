@@ -1,6 +1,6 @@
 from contextlib import asynccontextmanager
 from typing import AsyncIterator
-
+import logging
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 
@@ -12,7 +12,9 @@ from word_validator.dependencies import initialize_trie
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncIterator[None]:
     app.state.config = Config()
+    logging.info(app.state.config.dictionary_file_path)
     app.state.trie = initialize_trie(app.state.config.dictionary_file_path)
+    logging.info(app.state.trie)
     yield
 
 
