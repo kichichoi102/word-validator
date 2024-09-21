@@ -11,7 +11,5 @@ def initialize_trie(file_path: str) -> Trie:
 
 
 def get_trie_from_app(request: Request) -> Trie:
-    trie: Trie = initialize_trie("word_validator/data/storage/scrabble_words.txt")
-    request_app = request.app
-    print(request_app)
+    trie: Trie = request.app.state.trie
     return trie
