@@ -16,9 +16,6 @@ TEMP_DIRECTORY = "word_validator/data/tmp/"
 
 search_router = APIRouter()
 
-print('hello')
-
-
 @search_router.get("/search", response_model=SearchResponse)
 async def search_word(
     word: str, trie: Trie = Depends(get_trie_from_app)
